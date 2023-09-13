@@ -14,8 +14,8 @@ import java.util.List;
 @Controller
 public class CarController {
     private final CarServiceImpl carService;
-    @Autowired
-    public CarController(CarServiceImpl carService){
+
+    public CarController(CarServiceImpl carService) {
         this.carService = carService;
     }
 
@@ -23,14 +23,7 @@ public class CarController {
     @GetMapping(value = "/cars")
     public String viewCars(@RequestParam(defaultValue = "5") int count, ModelMap model) {
 
-        List<Car> allCars = new ArrayList<>();
-        allCars.add(new Car("Red","Mazda",111));
-        allCars.add(new Car("Green","Renault",222));
-        allCars.add(new Car("Blue","BMW",333));
-        allCars.add(new Car("White","Mercedes",444));
-        allCars.add(new Car("Black","Audi",555));
-
-        List<Car> cars = carService.getCarsList(allCars, count);
+        List<Car> cars = carService.getCarsList(count);
         model.addAttribute("cars", cars);
         return "cars";
     }
